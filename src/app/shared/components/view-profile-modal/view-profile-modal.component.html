@@ -1,0 +1,69 @@
+<div #classModal class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header"
+        style="background-color: #0056b3; color: white; display: flex; align-items: center; justify-content: space-between;">
+        <h5 class="modal-title" id="classModalLabel" style="font-weight: bold; margin: 0;">Doctor Profile</h5>
+        <button type="button" style="color: white;" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          style="color: white;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="contact-info">
+          <div class="info">
+            <div class="information" style=" display: flex;justify-content: center;">
+              <div class="avatar-container" style="width: 150px; height: 150px;">
+                <img src="{{ getImageUrl(DoctorDetails?.imageFile) }}" class="avatar avatar-medium rounded-circle"
+                  alt="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-user" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.firstName | capitalize }} {{ DoctorDetails?.lastName
+                    |capitalize }}</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-phone" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.phone }}</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-stethoscope" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.specialty }}</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-venus-mars" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.gender }}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-calendar-alt" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.experienceYears }} Years</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fa fa-map-marker"  aria-hidden="true" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.city }}</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-clock" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">Shift: {{ formatTime(DoctorDetails?.shiftStart||"") }} - {{
+                    formatTime(DoctorDetails?.shiftEnd || "") }}</span>
+                </div>
+                <div class="information" style="margin: 30px;">
+                  <i class="fas fa-graduation-cap" style="color: #0056b3; margin-right: 10px;"></i>
+                  <span style="font-size: 18px;">{{ DoctorDetails?.qualifications }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a [routerLink]="['/book', DoctorDetails?.doctorID]" (click)="closePopup()" class="btn btn-primary">Book Now</a>
+        <button type="button" class="btn btn-secondary" #closeModalBtn data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

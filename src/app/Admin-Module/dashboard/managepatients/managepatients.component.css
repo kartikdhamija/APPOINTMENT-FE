@@ -1,0 +1,21 @@
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 16px; /* Adjust margin as needed */
+}
+.flex {
+  display: flex;
+}
+
+.action-buttons {
+  margin-right: 10px; /* Adjust margin between buttons if necessary */
+}
+.example-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  margin-left: auto; /* Align the navbar to the right */
+}

@@ -1,0 +1,120 @@
+<header id="topnav" class="navigation sticky ">
+  <div class="container">
+    <!-- Logo container-->
+    <div>
+      <a class="logo" href="index.html">
+        <span class="logo-light-mode">
+          <img src="assets/images/logo-dark.png" class="l-dark" height="22" alt="">
+          <img src="assets/images/logo-light.png" class="l-light" height="22" alt="">
+        </span>
+        <img src="assets/images/logo-light.png" height="22" class="logo-dark-mode" alt="">
+      </a>
+    </div>
+    <!-- End Logo container-->
+
+    <!-- Start Mobile Toggle -->
+    <div class="menu-extras">
+      <div class="menu-item">
+        <!-- Mobile menu toggle-->
+        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+          <div class="lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+        <!-- End mobile menu toggle-->
+      </div>
+    </div>
+    <!-- End Mobile Toggle -->
+
+    <!-- Start Dropdown -->
+    <ul class="dropdowns list-inline mb-0">
+      <li class="list-inline-item mb-0 ms-1">
+        <div class="dropdown dropdown-primary">
+          <ng-container *ngIf="!isAdminRoute && !isPatientRoute && !isDoctorRoute">
+            <button id="signBtn" type="button" (click)="LoginUser()">LogIn</button>
+          </ng-container>
+          <ng-container *ngIf="isAdminRoute || isPatientRoute || isDoctorRoute">
+            <button type="button" class="btn btn-pills btn-primary dropdown-toggle p-1" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <ng-container *ngIf="Profile && Profile.imageFile && Profile.imageFile.length !== 0">
+                <img class="avatar avatar-md-sm rounded-circle border shadow" src="{{ getImageUrl(Profile.imageFile) }}"
+                  alt="">
+              </ng-container>
+              <ng-container *ngIf="!Profile || !Profile.imageFile || Profile.imageFile.length === 0">
+                <img class="avatar avatar-md-sm rounded-circle border shadow" src="assets/images/admin.png" alt="">
+              </ng-container>
+              {{ Profile?.firstName || 'Admin1234' }} {{ Profile?.lastName }}
+            </button>
+          </ng-container>
+
+          <div class="dropdown-menu dd-menu dropdown-menu-end shadow border-0 mt-3 py-3" style="min-width: 200px;">
+            <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+              <!-- <img src="assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt=""> -->
+              <ng-container *ngIf="Profile && Profile.imageFile && Profile.imageFile.length !== 0">
+                <img class="avatar avatar-md-sm rounded-circle border shadow" src="{{ getImageUrl(Profile.imageFile) }}"
+                  alt="">
+              </ng-container>
+              <ng-container *ngIf="!Profile || !Profile.imageFile || Profile.imageFile.length === 0">
+                <img class="avatar avatar-md-sm rounded-circle border shadow" src="assets/images/admin.png" alt="">
+              </ng-container>
+              <div class="flex-1 ms-2">
+                <span class="d-block mb-1">
+                  {{ Profile?.firstName || 'Admin1234' }}
+                </span>
+                <small class="text-muted">
+                  {{ Profile?.specialty || 'Admin' }}
+                </small>
+              </div>
+            </a>
+            <!-- <a class="dropdown-item text-dark" href="doctor-dashboard.html">
+              <span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span>
+              Dashboard
+            </a>
+            <a class="dropdown-item text-dark" routerLink="/login">
+              <span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span>
+              Login
+            </a>
+            <a class="dropdown-item text-dark" routerLink="">
+              <span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span>
+              Profile Settings
+            </a> -->
+            <div class="dropdown-divider border-top"></div>
+            <a class="dropdown-item text-dark" (click)="logout()">
+              <span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>
+              Logout
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <!-- End Dropdown -->
+
+    <!-- Navigation Menu-->
+    <div id="navigation">
+      <ul class="navigation-menu nav-left nav-dark" style="color: black;">
+        <ng-container *ngIf="!isAdminRoute && !isPatientRoute && !isDoctorRoute">
+          <li><a routerLink="">Home</a></li>
+          <li><a routerLink="">Contact</a></li>
+          <li><a routerLink="/patient-appointments">Get Appointments</a></li>
+          <li><a routerLink="/book-appointment">Book Appointment</a></li>
+        </ng-container>
+        <ng-container *ngIf="isAdminRoute">
+          <li><a routerLink="/admin/manage-doctors" style="color: black;">Doctor Lists</a></li>
+          <li><a routerLink="/admin/manage-patients" style="color: black;">Patients List</a></li>
+          <li><a routerLink="/admin/manage-appointments" style="color: black;">Appointment List</a></li>
+        </ng-container>
+        <!-- <ng-container *ngIf="isPatientRoute">
+          <li><a routerLink="patient-appointments">Patient Dashboard</a></li>
+        </ng-container> -->
+        <ng-container *ngIf="isDoctorRoute">
+          <li><a routerLink="dashboard">Dashboard</a></li>
+          <li><a routerLink="appointments">Your Appointments</a></li>
+        </ng-container>
+      </ul>
+    </div>
+    <!--end navigation-->
+  </div>
+  <!--end container-->
+</header>

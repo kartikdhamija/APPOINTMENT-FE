@@ -1,0 +1,232 @@
+<!-- <app-header [Profile]="doctorProfile"></app-header> -->
+<div style="margin-top: 8%;">
+<!-- dashboard.component.html -->
+<div style="margin: 10px;">
+<!-- <head>
+  CSS
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-left: -12px;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarCenteredExample"
+      aria-controls="navbarCenteredExample" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarCenteredExample">
+      <h1 style="color: white;">Your Appointments</h1>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="background-color: #f8f9fa;">
+      <div class="modal-header" style="background-color: #007bff; color: white;">
+        <h5 class="modal-title" id="classModalLabel">Class Update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeAppointmentForm()" #closeModalBtn></button>
+      </div>
+      <form [formGroup]="appointmentForm" (ngSubmit)="appointmentFormSubmission()">
+        <div class="mb-3" style="margin:10px">
+          <label for="patientID" class="form-label">Patient</label>
+          <select id="patientID" class="form-select" formControlName="patientID">
+            <option value="" >Select Patient</option>
+            <option *ngFor="let patient of patients" [value]="patient.patientID">{{ patient.firstName }} {{patient.lastName}}</option>
+          </select>
+          <div *ngIf="appointmentForm.get('patientID')?.invalid && appointmentForm.get('patientID')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('patientID')?.errors?.['required']">Patient is required</div>
+          </div>
+        </div>
+
+        <!-- <div class="mb-3" style="margin:10px">
+          <label for="doctorID" class="form-label">Doctor</label>
+          <select id="doctorID" class="form-select" formControlName="doctorID">
+            <option value="" disabled selected>Select Doctor</option>
+            <option *ngFor="let doctor of doctors" [value]="doctor.doctorID">{{ doctor.firstName }} {{doctor.lastName}}</option>
+          </select>
+          <div *ngIf="appointmentForm.get('doctorID')?.invalid && appointmentForm.get('doctorID')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('doctorID')?.errors?.['required']">Doctor is required</div>
+          </div>
+        </div> -->
+
+        <div class="mb-3" style="margin:10px">
+          <label for="appointmentDate" class="form-label">Appointment Date</label>
+          <input id="appointmentDate" type="date" class="form-control" formControlName="appointmentDate" (change)="onDateChange()">
+          <div *ngIf="appointmentForm.get('appointmentDate')?.invalid && appointmentForm.get('appointmentDate')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('appointmentDate')?.errors?.['required']">Appointment Date is required</div>
+          </div>
+        </div>
+
+        <div class="mb-3" style="margin: 10px">
+          <label for="appointmentStatus" class="form-label">Appointment Status</label>
+          <select id="appointmentStatus" class="form-select" formControlName="appointmentStatus" >
+            <option value="" >Select Appointment Status</option>
+            <option value="Scheduled" >Scheduled</option>
+            <option value="Cancelled">Cancelled</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <div *ngIf="appointmentForm.get('appointmentStatus')?.invalid && appointmentForm.get('appointmentStatus')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('appointmentStatus')?.errors?.['required']">Appointment Status is required</div>
+          </div>
+        </div>
+
+        <div class="mb-3" style="margin:10px">
+          <label for="appointmentStatusNotes" class="form-label">Appointment Status Notes</label>
+          <textarea id="appointmentStatusNotes" class="form-control" formControlName="appointmentStatusNotes"></textarea>
+          <div *ngIf="appointmentForm.get('appointmentStatusNotes')?.invalid && appointmentForm.get('appointmentStatusNotes')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('appointmentStatusNotes')?.errors?.['required']">Appointment Status Notes is required</div>
+          </div>
+        </div>
+
+
+        <div class="mb-3" style="margin:10px">
+          <label for="appointmentNotes" class="form-label">Appointment Notes</label>
+          <textarea id="appointmentNotes" class="form-control" formControlName="appointmentNotes"></textarea>
+          <div *ngIf="appointmentForm.get('appointmentNotes')?.invalid && appointmentForm.get('appointmentNotes')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('appointmentNotes')?.errors?.['required']">Appointment Notes is required</div>
+          </div>
+        </div>
+
+        <div class="mb-3" style="margin:10px">
+          <label for="appointmentTime" class="form-label">Appointment Time</label>
+          <select id="appointmentTime" class="form-select" formControlName="appointmentTime">
+            <option value="">Select Time</option>
+            <option *ngFor="let timeSlot of timeSlots" [value]="timeSlot.time" [disabled]="timeSlot.isBooked" [selected]="timeSlot.time === appointmentForm.get('appointmentTime').value">
+              {{formatTime(timeSlot.time)}}
+            </option>
+          </select>
+          <div
+            *ngIf="appointmentForm.get('appointmentTime')?.invalid && appointmentForm.get('appointmentTime')?.touched"
+            class="text-danger">
+            <div *ngIf="appointmentForm.get('appointmentTime')?.errors?.['required']">Appointment Time is required</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeAppointmentForm()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div >
+
+<div class="example-header">
+  <mat-form-field style="margin: 10px;">
+    <input matInput (keyup)="filterByValue($event)" placeholder="Filter">
+  </mat-form-field>
+
+  <mat-form-field style="margin: 10px;">
+    <input #datepickerInput class="mat-datepicker-input" matInput [matDatepicker]="picker" placeholder="Select date" [(ngModel)]="date" (dateChange)="filterByDate($event)">
+    <mat-icon matDatepickerToggleIcon (click)="clearDate($event)">clear</mat-icon>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <nav class="navbar ">
+    <div class="container-fluid">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#classModal"
+            (click)="openAppointmentForm()">
+            Add Appointment
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+<div class="mat-elevation-z8">
+  <div class="table-container mat-table-responsive">
+    <div class="table-scroll">
+    <table mat-table class="datatablee" [dataSource]="dataSource" matSort (matSortChange)="sortAppointments($event)">
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <!--  -->
+      <ng-container matColumnDef="patientName">
+        <th mat-header-cell *matHeaderCellDef> Patient Name </th>
+        <td mat-cell *matCellDef="let row">{{ row.patientName }}</td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="doctorName">
+        <th mat-header-cell *matHeaderCellDef> Doctor Name </th>
+        <td mat-cell *matCellDef="let row">{{ row.doctorName }}</td>
+      </ng-container> -->
+      <ng-container matColumnDef="patientID">
+        <th mat-header-cell *matHeaderCellDef [hidden]="true"> Patient ID </th>
+        <td mat-cell *matCellDef="let row" [hidden]="true">{{ row.patientID }}</td>
+      </ng-container>
+      <ng-container matColumnDef="doctorID">
+        <th mat-header-cell *matHeaderCellDef [hidden]="true"> Doctor ID </th>
+        <td mat-cell *matCellDef="let row" [hidden]="true"> {{ row.doctorID }}</td>
+      </ng-container>
+      <ng-container matColumnDef="appointmentID" >
+        <th mat-header-cell *matHeaderCellDef [hidden]="true"> Appointment ID </th>
+        <td mat-cell *matCellDef="let row" [hidden]="true">{{ row.appointmentID }}</td>
+      </ng-container>
+      <ng-container matColumnDef="appointmentDate">
+        <th mat-header-cell *matHeaderCellDef> Appointment Date </th>
+        <td mat-cell *matCellDef="let row">{{ row.appointmentDate | date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="appointmentTime">
+        <th mat-header-cell *matHeaderCellDef> Appointment Time </th>
+        <td mat-cell *matCellDef="let row">{{ formatTime(row.appointmentTime)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="appointmentStatus">
+        <th mat-header-cell *matHeaderCellDef>Appointment Status</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="pill" [ngClass]="getAppointmentStatusClass(row.appointmentStatus)">
+            {{ row.appointmentStatus }}
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="appointmentNotes">
+        <th mat-header-cell *matHeaderCellDef> Appointment Notes </th>
+        <td mat-cell *matCellDef="let row">{{ row.appointmentNotes }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row" class="actions-cell">
+          <div class="flex">
+            <div class="action-buttons">
+              <button mat-icon-button class="btn btn-danger" (click)="DeleteAppointment(row.appointmentID)">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="action-buttons">
+              <button mat-icon-button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#classModal" (click)="UpdateAppointmentDetails(row)">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    </div>
+  </div>
+  <mat-paginator  [length]="totalData" [pageSizeOptions]="pageSizes" (page)="handlePagination($event)"
+    #paginator></mat-paginator>
+</div>
+
+</div>
+
+<div *ngIf="dataList && dataList?.length <= 0">
+
+  <app-no-records></app-no-records>
+</div>
+
+</div>
+
+</div>

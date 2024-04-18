@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="banner-container position-relative mb-4">
+      <img src="../../../../../assets/images/bg/b8.jpg" class="banner-image rounded">
+      <div class="overlay-content">
+        <div class="filter-container doctor-header">
+          <div class="content m-3">
+            <h3 class="mt-3">Welcome!</h3>
+            <h1>{{ Stats?.firstName|| 'Doctor' }} {{ Stats?.lastName }}</h1>
+            <p>Thanks for joining us. We are always trying to provide you with complete service.<br>
+              You can view your daily schedule, reach patients, and schedule appointments</p>
+            <button (click)="displayAppointments()" class="non-style-link btn-primary btn" style="width:30%">View My Appointments</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <h2 class="text-center mb-4">Status</h2>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <div class="h1-dashboard">{{Stats?.totalAppointments}}</div>
+              <br>
+              <div class="h3-dashboard">Total Appointments </div>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More Info
+              <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <div class="h1-dashboard">{{Stats?.totalCompletedAppointments}}</div>
+              <br>
+              <div class="h3-dashboard">Completed Appointments</div>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More Info
+              <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-6 col-md-6">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <div class="h1-dashboard">{{Stats?.numberOfPatientsAppointed}}</div>
+              <br>
+              <div class="h3-dashboard">No of Patients Appointments</div>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More Info
+              <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <div class="h1-dashboard">{{Stats?.todaysAppointment}}</div>
+              <br>
+              <div class="h3-dashboard">Today's Appointment</div>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More Info
+              <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mt-lg-0 mt-4  text-white p-2 rounded" style="background-color: rgb(226 228 231 / 40%);">
+      <h2 class="text-center mb-4" style="color:black">Appointments</h2>
+      <div class="d-flex justify-content-center">
+        <div style=" width: 100%;max-width: 400px;">
+          <canvas #chartCanvas id="canvas" height="320">{{chart}}</canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

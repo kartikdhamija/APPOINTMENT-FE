@@ -1,0 +1,7 @@
+.no-records-found {
+  font-size: 18px; /* adjust font size as needed */
+  font-weight: 600; /* adjust font weight as needed */
+  color: #333; /* adjust font color as needed */
+  text-align: center; /* center the message horizontally */
+  margin-top: 20px; /* adjust top margin as needed */
+}

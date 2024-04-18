@@ -1,0 +1,128 @@
+<app-header></app-header>
+  <!-- dashboard.component.html -->
+
+    <section class="bg-half-170 d-table w-100" id="home" >
+      <div class="bg-overlay bg-overlay-dark"></div>
+      <div class="container">
+        <div class="row justify-content-center mt-5">
+          <div class="col-xl-10">
+            <div class="heading-title text-center">
+              <img src="assets/images/logo-icon.png" height="50" alt="">
+              <h4 class="heading fw-bold text-white title-dark mt-3 mb-4">Search Your Appointments</h4>
+              <p class="para-desc mx-auto text-white-50 mb-0">Find the right doctor for you or your family members.
+                Get effective immediate assistance, emergency treatment, or a simple consultation.</p>
+              <div class="mt-4 pt-2">
+                <form [formGroup]="mobileForm" (ngSubmit)="formSubmission()"
+                  class="rounded text-start shadow p-4 bg-white-50">
+                  <div class="row align-items-center">
+                    <div class="col-md mt-4 mt-sm-0">
+                      <div class="input-group bg-white border rounded" style="opacity: 0.7;">
+                        <span class="input-group-text border-0">
+                          <i class="ri-phone-line text-primary h5 fw-normal mb-0"></i>
+                        </span>
+                        <input formControlName="mobileNumber" id="mobileNumber" type="tel" class="form-control border-0"
+                          placeholder="Enter Your Mobile Number">
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-md-auto mt-4 mt-sm-0">
+                      <div class="d-grid d-md-block">
+                        <button type="submit" class="btn btn-success">Find Appointments</button>
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+                <!--end form-->
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </section>
+<!--
+    <div class="row mb-5 align-items-center justify-content-center " style="margin-top:10px;margin-bottom: 10px;">
+      <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100">
+        <img src="../../../../assets/images/undraw_youtube_tutorial.svg" alt="Image" class="img-fluid" style="filter: hue-rotate(342deg) brightness(90%) contrast(110%) saturate(120%);">
+      </div>
+    </div> -->
+
+    <div *ngIf="showRecords" class="main-section">
+      <div class="container ">
+        <h2 class="text-center mt-5 mb-4" style="color: #396cf0;">Your Appointments</h2>
+        <!-- <button (click)="displaySearchAgain()" class="book-now-button">Search Again</button> -->
+        <!-- <button (click)="displaySearchAgain()" class="book-now-button">Book Appointment</button> -->
+        <div class="mat-elevation-z8">
+          <div class="table-container mat-table-responsive">
+            <div class="table-scroll">
+              <table mat-table class="datatablee table border-collapse: collapse; table-bordered table-light" style="background:#3f67cb" [dataSource]="dataSource" matSort
+                (matSortChange)="sortAppointments($event)">
+                <ng-container matColumnDef="appointmentID">
+                  <th mat-header-cell *matHeaderCellDef> Appointment ID </th>
+                  <td mat-cell *matCellDef="let row" [hidden]="true">{{ row.appointmentID }}</td>
+                </ng-container>
+                <ng-container matColumnDef="doctorName">
+                  <th mat-header-cell *matHeaderCellDef> Doctor Name </th>
+                  <td mat-cell *matCellDef="let row">{{ row.doctorName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="patientID">
+                  <th mat-header-cell *matHeaderCellDef [hidden]="true"> Patient ID </th>
+                  <td mat-cell *matCellDef="let row" [hidden]="true">{{ row.patientID }}</td>
+                </ng-container>
+                <ng-container matColumnDef="doctorID">
+                  <th mat-header-cell *matHeaderCellDef [hidden]="true"> Doctor ID </th>
+                  <td mat-cell *matCellDef="let row" [hidden]="true"> {{ row.doctorID }}</td>
+                </ng-container>
+                <ng-container matColumnDef="appointmentDate">
+                  <th mat-header-cell *matHeaderCellDef > Appointment Date </th>
+                  <td mat-cell *matCellDef="let row">{{ row.appointmentDate | date}}</td>
+                </ng-container>
+                <ng-container matColumnDef="appointmentTime">
+                  <th mat-header-cell *matHeaderCellDef > Appointment Time </th>
+                  <td mat-cell *matCellDef="let row">{{ formatTime(row.appointmentTime)}}</td>
+                </ng-container>
+                <ng-container matColumnDef="appointmentStatus">
+                  <th mat-header-cell *matHeaderCellDef>Appointment Status</th>
+                  <td mat-cell *matCellDef="let row" [ngClass]="getAppointmentStatusClass(row.appointmentStatus)">
+                    {{ row.appointmentStatus }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="appointmentNotes">
+                  <th mat-header-cell *matHeaderCellDef> Appointment Notes </th>
+                  <td mat-cell *matCellDef="let row">{{ row.appointmentNotes }}</td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Actions">
+                  <th mat-header-cell *matHeaderCellDef> Actions </th>
+                  <td mat-cell *matCellDef="let row" class="actions-cell">
+                    <div class="flex">
+                      <div class="action-buttons">
+                        <button mat-icon-button class="btn btn-danger" (click)="DeleteAppointment(row.appointmentID)">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="action-buttons">
+                        <button mat-icon-button class="btn btn-secondary" data-bs-toggle="modal"
+                          data-bs-target="#classModal" (click)="UpdateAppointmentDetails(row)">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<app-footer></app-footer>
+
+

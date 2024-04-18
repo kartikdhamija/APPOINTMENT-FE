@@ -1,0 +1,319 @@
+<app-header></app-header>
+<div style="margin-top: 4%;">
+  <!-- dashboard.component.html -->
+  <div>
+    <div class="main">
+      <div class="container">
+        <span class="big-circle"></span>
+        <img src="img/shape.png" class="square" alt="" />
+        <div class="form">
+          <div class="contact-info">
+            <ng-container>
+              <h3 class="title">Doctor Profile</h3>
+              <p class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                dolorum adipisci recusandae praesentium dicta!
+              </p>
+              <div class="info">
+                <div class="information" style=" display: flex;justify-content: center;">
+                  <div class="avatar-container" style="width: fit-content;">
+                    <img src="{{getImageUrl(DoctorDetails.imageFile)}}" class="avatar avatar-medium rounded-circle"
+                      alt="">
+                  </div>
+                </div>
+                <div class="information" style="margin-top: 10px;">
+                  <i class="fas fa-user"></i>
+                  <p style="margin-left: 10px;">{{DoctorDetails.firstName | capitalize}} {{DoctorDetails.lastName |
+                    capitalize}}</p>
+                </div>
+                <div class="information" style="margin-top: 10px;">
+                  <i class="fas fa-phone"></i>
+                  <p style="margin-left: 10px;">{{DoctorDetails.phone}}</p>
+                </div>
+                <div class="information" style="margin-top: 10px;">
+                  <i class="fas fa-stethoscope"></i>
+                  <p style="margin-left: 10px;">{{DoctorDetails.specialty}}</p>
+                </div>
+
+                <div class="information" style="margin-top: 10px;">
+                  <i class="fas fa-clock"></i>
+                  <p style="margin-left: 10px;">Shift: {{ formatTime(DoctorDetails.shiftStart||"") }} - {{
+                    formatTime(DoctorDetails.shiftEnd || "") }}</p>
+                </div>
+              </div>
+              <div class="social-media">
+                <p>Connect with us :</p>
+                <div class="social-icons">
+                  <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container>
+
+            </ng-container>
+
+          </div>
+
+
+          <div class="contact-form">
+            <span class="circle one"></span>
+            <span class="circle two"></span>
+
+            <form [formGroup]="patientForm" (ngSubmit)="formSubmission('patientDetails')" style="margin: 20px;"
+              *ngIf="detailsSubmitted == 'newPatientForm'">
+              <h3 class="title">Enter Your Details</h3>
+              <div class="row">
+                <!-- First Name -->
+                <div class="col-md-5">
+                  <!-- First Name -->
+                  <div class="input-container">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="input" id="firstName" formControlName="firstName" />
+                    <span>First Name</span>
+                    <div *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('firstName')?.errors?.['required']">First Name is Required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                  <!-- Last Name -->
+                  <div class="input-container">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="input" id="lastName" formControlName="lastName" />
+                    <span>Last Name</span>
+                    <div *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('lastName')?.errors?.['required']">Last Name is Required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Gender -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="gender">Gender</label>
+                    <select class="input" id="gender" formControlName="gender">
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <span>Gender</span>
+                    <div *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('gender')?.errors?.['required']">Gender is Required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- Date of Birth -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" class="input" id="dateOfBirth" formControlName="dateOfBirth" />
+                    <span>Date of Birth</span>
+                    <div *ngIf="patientForm.get('dateOfBirth')?.invalid && patientForm.get('dateOfBirth')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is Required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Email -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="email">Email</label>
+                    <input type="email" class="input" id="email" formControlName="email" />
+                    <span>Email</span>
+                    <div *ngIf="patientForm.get('email')?.invalid && patientForm.get('email')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('email')?.errors?.['required']">Email is Required</div>
+                      <div *ngIf="patientForm.get('email')?.errors?.['email']">Invalid Email Format</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- Phone -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="input" id="phone" formControlName="phone" />
+                    <span>Phone</span>
+                    <div *ngIf="patientForm.get('phone')?.invalid && patientForm.get('phone')?.touched" class="text-danger">
+                      <div *ngIf="patientForm.get('phone')?.errors?.['required']">Phone Number is Required</div>
+                      <div *ngIf="patientForm.get('phone')?.errors?.['pattern']">Number should be 10 digits</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="country">Country</label>
+                    <select class="input" id="country" (change)="countrySelected(patientForm.get('country').value)"
+                      formControlName="country">
+                      <option value="">Select Country</option>
+                      <option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</option>
+                    </select>
+                    <div *ngIf="patientForm.get('country')?.invalid && patientForm.get('country')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('country')?.errors?.['required']">Country is Required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- State -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="state">State</label>
+                    <select class="input" id="state" formControlName="state" (change)="stateSelected($event.target)">
+                      <option value="">Select State</option>
+                      <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                    </select>
+                    <div *ngIf="patientForm.get('state')?.invalid && patientForm.get('state')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('state')?.errors?.['required']">State is Required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- city -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="city">City</label>
+                    <select class="input" id="city" formControlName="city">
+                      <option value="">Select City</option>
+                      <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                    </select>
+                    <div *ngIf="patientForm.get('city')?.invalid && patientForm.get('city')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('city')?.errors?.['required']">City is Required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- Zip Code -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" class="input" id="zipCode" formControlName="zipCode" />
+                    <span>Zip Code</span>
+                    <div *ngIf="patientForm.get('zipCode')?.invalid && patientForm.get('zipCode')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('zipCode')?.errors?.['required']">Zip Code is Required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+
+
+                <!-- Country -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="address">Address</label>
+                    <input type="text" class="input" id="address" formControlName="address" />
+                    <span>Address</span>
+                    <div *ngIf="patientForm.get('address')?.invalid && patientForm.get('address')?.touched"
+                      class="text-danger">
+                      <div *ngIf="patientForm.get('address')?.errors?.['required']">Address is Required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- Upload Image -->
+                <div class="col-md-5">
+                  <div class="input-container">
+                    <label for="image">Upload Image</label>
+                    <input type="file" class="form-control" id="image" (change)="onFileSelected($event)"
+                      accept="image/*" style="display: block;">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn-Form">Next</button>
+              <p style="color: #fafafa;margin: 10px;font-size: medium;font-weight: 500;">Already a Patient <a (click)="PatientForm('oldPatient')" class = "patient" style="color:#1abc9c"> Click Here</a></p>
+            </form>
+
+            <form [formGroup]="oldPatientForm" (ngSubmit)="formSubmission('newPatientDetails')" style="margin: 20px;"
+            *ngIf="detailsSubmitted == 'oldPatientForm'">
+            <h3 class="title">Enter Your Details</h3>
+            <div class="input-container">
+              <label for="phone">Phone</label>
+              <input type="text" class="input" id="phone" formControlName="phone" />
+              <span>Phone</span>
+              <div *ngIf="oldPatientForm.get('phone')?.invalid && oldPatientForm.get('phone')?.touched" class="text-danger">
+                <div *ngIf="oldPatientForm.get('phone')?.errors?.['required']">Phone Number is Required</div>
+                <div *ngIf="oldPatientForm.get('phone')?.errors?.['pattern']">Number should be 10 digits</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-Form">Next</button>
+            <p style="color: #fafafa;margin: 10px;font-size: medium;font-weight: 500;">New Patient <a (click)="PatientForm('newPatient')" class = "patient" style="color:#1abc9c"> Click Here</a></p>
+          </form>
+
+            <form [formGroup]="appointmentForm" (ngSubmit)="formSubmission('appointmentDetails')" style="margin: 20px;"
+            *ngIf="detailsSubmitted == 'appointmentForm'">
+              <h3 class="title">Enter Your Appointment Details</h3>
+
+              <div class="input-container">
+                <label for="appointmentDate">Select Appointment Date</label>
+                <input type="date" class="input" id="appointmentDate" formControlName="appointmentDate"
+                  (change)="onDateChange()" />
+                <div
+                  *ngIf="appointmentForm.get('appointmentDate')?.invalid && appointmentForm.get('appointmentDate')?.touched"
+                  class="text-danger">
+                  <div *ngIf="appointmentForm.get('appointmentDate')?.errors?.['required']">Appointment Date is Required
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="showDynamicFields">
+                <div class="card-container">
+                  <ng-container *ngFor="let time of availableTimeSlots">
+                    <div class="card" [class.selected-card]="isSelectedTime(time)"
+                      [class.already-booked]="time.isBooked" (click)="selectTimeSlot(time)">
+                      <div class="card-inside">{{ formatTime(time.time) }}</div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-Form" style="margin-top: 10px;" *ngIf="showDynamicFields">Book
+                Appointment</button>
+              <button type="submit" class="btn-Form" style="margin-top: 10px;" *ngIf="!showDynamicFields">Next</button>
+            </form>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<app-footer></app-footer>

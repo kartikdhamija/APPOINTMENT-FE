@@ -1,0 +1,29 @@
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-bottom: 16px; /* Adjust margin as needed */
+}
+/* Example styles */
+.warn-color {
+  color: warn !important; /* !important ensures this style overrides the default */
+}
+
+.purple-color {
+  color: purple !important;
+}
+.flex {
+  display: flex;
+}
+
+.action-buttons {
+  margin-right: 10px; /* Adjust margin between buttons if necessary */
+}
+.example-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  margin-left: auto; /* Align the navbar to the right */
+}

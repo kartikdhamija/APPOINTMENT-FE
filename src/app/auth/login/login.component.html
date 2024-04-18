@@ -1,0 +1,27 @@
+
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username" class="form-control">
+      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+        <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
+        <div *ngIf="loginForm.get('username')?.errors?.['pattern']">Username must be a valid Gmail address.</div>
+      </div>
+    </div>
+    <div class="form-group">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" class="form-control">
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+        <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+
+
+  </form>
+</div>
+

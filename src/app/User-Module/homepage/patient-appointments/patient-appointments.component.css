@@ -1,0 +1,30 @@
+table {
+  border: none;
+  width: 100%;
+  border-collapse: collapse;  border-spacing: 0;
+}
+
+table {
+  border: none;
+  width: 100%;
+}
+
+th{
+  padding: 18px 7px;
+  font-size: 16px;
+  color: #d4cfcf;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+
+th{
+font-size: 16px;
+color: #d4cfcf;
+font-weight: 400;
+text-transform: capitalize;
+padding: 18px 40px;
+padding-right: 7px;
+border-collapse: collapse;
+border-spacing: 0;
+}

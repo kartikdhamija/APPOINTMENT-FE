@@ -1,0 +1,94 @@
+.flex {
+  display: flex;
+}
+
+.action-buttons {
+  margin-right: 10px; /* Adjust margin between buttons if necessary */
+}
+.scheduled {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: blue; /* or any color you prefer */
+}
+
+.cancelled {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: red;
+}
+
+.completed {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: green;
+}
+.example-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  margin-left: auto; /* Align the navbar to the right */
+}
+
+
+
+.no-records-found {
+  font-size: 18px; /* adjust font size as needed */
+  font-weight: 600; /* adjust font weight as needed */
+  color: #333; /* adjust font color as needed */
+  text-align: center; /* center the message horizontally */
+  margin-top: 20px; /* adjust top margin as needed */
+}
+
+.scheduled {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: blue;
+}
+
+.cancelled {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: red;
+}
+
+.completed {
+  font-weight: bold;
+  font-size: 1.0em;
+  color: green;
+}
+
+.pill {
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.pill.scheduled {
+  background-color: #ADD8E6;
+}
+
+.pill.cancelled {
+  background-color: #FFB6C1;
+}
+
+.pill.completed {
+  background-color: #90EE90;
+}
+
+
+/* mat-datepicker-toggle {
+  display: inline-block;
+} */
+.mat-datepicker-input {
+  width: 85%;
+}
+
+mat-icon {
+  position: relative;
+  float: right;
+  top: -1px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+}

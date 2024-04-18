@@ -1,0 +1,55 @@
+<!-- Doctors Section -->
+<section class="section pb-0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="section-title text-center mb-4 pb-2">
+          <h4 class="title mb-4">Doctors</h4>
+          <p class="text-muted mx-auto para-desc mb-0">These are Our Listed Certified Doctors. Please Book the Appointment with any Doctor Based on your Needs. </p>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <!-- Loop Through Doctors -->
+      <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2" *ngFor="let doctor of doctors">
+        <div class="card team border-0 rounded shadow overflow-hidden" >
+          <div class="team-img position-relative">
+            <img src="{{getImageUrl(doctor.imageFile)}}" class="img-fluid" [alt]="doctor.name" style="width: 100%;
+            height: 250px; /* Adjusted height */
+            object-fit: cover;
+            background-size: cover;">
+            <!-- <ul class="list-unstyled team-social mb-0">
+                            <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i
+                                        data-feather="facebook" class="icons"></i></a></li>
+                            <li class="mt-2"><a href="javascript:void(0)"
+                                    class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin"
+                                        class="icons"></i></a></li>
+                            <li class="mt-2"><a href="javascript:void(0)"
+                                    class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github"
+                                        class="icons"></i></a></li>
+                            <li class="mt-2"><a href="javascript:void(0)"
+                                    class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter"
+                                        class="icons"></i></a></li>
+                                        this is where i am using it but when this component it doesn't show its component cause
+                        </ul> -->
+          </div>
+          <div class="card-body text-center">
+            <a [routerLink]="'/doctor/' + doctor.doctorID" class="title text-dark h5 d-block mb-0">{{
+              doctor.firstName + " " +doctor.lastName }}</a>
+            <small class="text-muted speciality">{{ doctor.specialty }}</small>
+            <div class="col pt-2" style="margin-bottom: 10px;">
+              <a href="#" data-bs-toggle="modal" (click)="GetDoctorProfile(doctor.doctorID)"
+                data-bs-target="#classModal" class="btn btn-info btn-sm" style="margin: 1px;" >ViewProfile</a>
+              <a [routerLink]="['/book', doctor.doctorID]" class="btn btn-primary btn-sm" style="margin: 1px;">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <app-view-profile-modal [DoctorDetails]="DoctorDetails"></app-view-profile-modal>
+
+<!-- End Doctors Section -->

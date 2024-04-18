@@ -1,13 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Template</title>
+  <title>Doctor-Appointment</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/images/logo-dark.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+  <!-- Css -->
+  <link href="assets/libs/js-datepicker/datepicker.min.css" rel="stylesheet">
+  <link href="assets/libs/tobii/css/tobii.min.css" rel="stylesheet">
+  <!-- Bootstrap Css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons Css -->
+  <link href="assets/css/icons.min.css" rel="stylesheet">
+  <link href="assets/libs/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <!-- Style Css-->
+  <link href="assets/css/style.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+
+<body class="mat-typography">
   <app-root></app-root>
+
+  <!-- javascript -->
+  <script src="assets/libs/tiny-slider/min/tiny-slider.js"></script>
+  <script src="assets/js/easy_background.js"></script>
+  <script src="assets/libs/tobii/js/tobii.min.js"></script>
+  <script src="assets/libs/feather-icons/feather.min.js"></script>
+  <!-- Main Js -->
+  <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/plugins.init.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- Call easy_background function -->
+  <!-- <script>
+    // Ensure the document is fully loaded before executing JavaScript
+    document.addEventListener("DOMContentLoaded", function () {
+      // Call easy_background function here
+      easy_background("#home", {
+        slide: [
+          "assets/images/bg/02.jpg",
+          "assets/images/bg/03.jpg",
+          "assets/images/bg/04.jpg",
+        ],
+        delay: [3000, 3000, 3000],
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var slider = tns({
+        container: ".client-review-slider",
+        items: 1,
+        controls: false,
+        mouseDrag: true,
+        loop: true,
+        rewind: true,
+        autoplay: true,
+        autoplayButtonOutput: false,
+        autoplayTimeout: 3000,
+        navPosition: "bottom",
+        speed: 400,
+        gutter: 16,
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var tobiiInstance = new Tobii();
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      feather.replace();
+    });
+  </script>
+
+  <script>
+    // Define topFunction to scroll to the top of the page
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+    // Call topFunction on DOMContentLoaded event
+    document.addEventListener("DOMContentLoaded", function () {
+      topFunction();
+    });
+  </script> -->
 </body>
+
 </html>
